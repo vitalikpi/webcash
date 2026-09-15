@@ -1,78 +1,135 @@
-export type AccountType =
-  | 'ASSET'
-  | 'LIABILITY'
-  | 'EQUITY'
-  | 'INCOME'
-  | 'EXPENSE'
-
 export interface Account {
   id: string
   name: string
-  type: AccountType
-  children?: Account[]
+  color: string | null
+  hidden: boolean
+  placeholder: boolean
+  commodity: string        // "NAMESPACE:MNEMONIC:PRECISION"
+  children: Account[]
 }
 
 export const accounts: Account[] = [
   {
-    id: 'assets',
+    id: 'a1',
     name: 'Assets',
-    type: 'ASSET',
+    color: null,
+    hidden: false,
+    placeholder: true,
+    commodity: 'CURRENCY:USD:2',
     children: [
       {
-        id: 'assets:current',
+        id: 'a2',
         name: 'Current Assets',
-        type: 'ASSET',
+        color: null,
+        hidden: false,
+        placeholder: true,
+        commodity: 'CURRENCY:USD:2',
         children: [
-          { id: 'assets:current:checking', name: 'Checking', type: 'ASSET' },
-          { id: 'assets:current:savings', name: 'Savings', type: 'ASSET' },
+          {
+            id: 'a3',
+            name: 'Checking',
+            color: '#4ade80',
+            hidden: false,
+            placeholder: false,
+            commodity: 'CURRENCY:USD:2',
+            children: [],
+          },
+          {
+            id: 'a4',
+            name: 'Savings',
+            color: null,
+            hidden: false,
+            placeholder: false,
+            commodity: 'CURRENCY:USD:2',
+            children: [],
+          },
         ],
       },
       {
-        id: 'assets:investments',
+        id: 'a5',
         name: 'Investments',
-        type: 'ASSET',
+        color: null,
+        hidden: false,
+        placeholder: true,
+        commodity: 'CURRENCY:USD:2',
         children: [
-          { id: 'assets:investments:brokerage', name: 'Brokerage', type: 'ASSET' },
-          { id: 'assets:investments:retirement', name: '401(k)', type: 'ASSET' },
+          {
+            id: 'a6',
+            name: 'Brokerage',
+            color: '#60a5fa',
+            hidden: false,
+            placeholder: false,
+            commodity: 'FUND:VTSAX:4',
+            children: [],
+          },
         ],
       },
     ],
   },
   {
-    id: 'liabilities',
+    id: 'b1',
     name: 'Liabilities',
-    type: 'LIABILITY',
+    color: null,
+    hidden: false,
+    placeholder: true,
+    commodity: 'CURRENCY:USD:2',
     children: [
-      { id: 'liabilities:credit-card', name: 'Credit Card', type: 'LIABILITY' },
-      { id: 'liabilities:mortgage', name: 'Mortgage', type: 'LIABILITY' },
+      {
+        id: 'b2',
+        name: 'Credit Card',
+        color: '#f87171',
+        hidden: false,
+        placeholder: false,
+        commodity: 'CURRENCY:USD:2',
+        children: [],
+      },
     ],
   },
   {
-    id: 'equity',
-    name: 'Equity',
-    type: 'EQUITY',
-    children: [
-      { id: 'equity:opening', name: 'Opening Balances', type: 'EQUITY' },
-    ],
-  },
-  {
-    id: 'income',
+    id: 'c1',
     name: 'Income',
-    type: 'INCOME',
+    color: null,
+    hidden: false,
+    placeholder: true,
+    commodity: 'CURRENCY:USD:2',
     children: [
-      { id: 'income:salary', name: 'Salary', type: 'INCOME' },
-      { id: 'income:interest', name: 'Interest', type: 'INCOME' },
+      {
+        id: 'c2',
+        name: 'Salary',
+        color: null,
+        hidden: false,
+        placeholder: false,
+        commodity: 'CURRENCY:USD:2',
+        children: [],
+      },
     ],
   },
   {
-    id: 'expenses',
+    id: 'd1',
     name: 'Expenses',
-    type: 'EXPENSE',
+    color: null,
+    hidden: false,
+    placeholder: true,
+    commodity: 'CURRENCY:USD:2',
     children: [
-      { id: 'expenses:food', name: 'Food & Dining', type: 'EXPENSE' },
-      { id: 'expenses:housing', name: 'Housing', type: 'EXPENSE' },
-      { id: 'expenses:transport', name: 'Transport', type: 'EXPENSE' },
-      { id: 'expenses:utilities', name: 'Utilities', type: 'EXPENSE' },
+      {
+        id: 'd2',
+        name: 'Food & Dining',
+        color: null,
+        hidden: false,
+        placeholder: false,
+        commodity: 'CURRENCY:USD:2',
+        children: [],
+      },
+      {
+        id: 'd3',
+        name: 'Housing',
+        color: null,
+        hidden: false,
+        placeholder: false,
+        commodity: 'CURRENCY:USD:2',
+        children: [],
+      },
     ],
   },
 ]

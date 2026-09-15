@@ -26,14 +26,20 @@ function AccountNode({ account, depth }: { account: Account; depth: number }) {
         <NavLink
           to={`/accounts/${account.id}`}
           className={({ isActive }) =>
-            `flex-1 truncate py-0.5 hover:text-zinc-900 dark:hover:text-zinc-100 ${
+            `flex flex-1 items-center gap-1.5 truncate py-0.5 hover:text-zinc-900 dark:hover:text-zinc-100 ${
               isActive
                 ? 'font-medium text-zinc-900 dark:text-zinc-100'
                 : 'text-zinc-600 dark:text-zinc-400'
             }`
           }
         >
-          {account.name}
+          {account.color && (
+            <span
+              className="h-2 w-2 shrink-0 rounded-full"
+              style={{ backgroundColor: account.color }}
+            />
+          )}
+          <span className="truncate">{account.name}</span>
         </NavLink>
       </div>
 
