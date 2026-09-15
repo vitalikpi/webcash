@@ -23,6 +23,25 @@ const features = [
   },
 ]
 
+const internals = [
+  {
+    title: "Real GnuCash. No tricks.",
+    body: "This isn't a library that reads your GnuCash file and hopes for the best. It's an official GnuCash build running as a server process, using the same engine that desktop GnuCash uses.",
+  },
+  {
+    title: "A thin HTTP wrapper, nothing more.",
+    body: "The API layer has no business logic. It calls GnuCash's Python bindings and returns what it gets back. The one thing it does add: a write lock that prevents concurrent edits from corrupting your file.",
+  },
+  {
+    title: "Packaged in Docker.",
+    body: "GnuCash is notoriously hard to install and pin. Docker makes the runtime reproducible — the image contains exactly the GnuCash version and SQLite driver that were tested together.",
+  },
+  {
+    title: "Written with AI. Debugged by a human.",
+    body: "The codebase was built with AI assistance and then read, tested, and fixed by a human. Every line you run has been looked at.",
+  },
+]
+
 const steps = [
   { n: "1", label: "Clone the repo", code: "git clone https://github.com/vitalikpi/webcash" },
   { n: "2", label: "Start the stack", code: "docker compose up" },
@@ -92,6 +111,25 @@ export default function App() {
               <div className="text-3xl mb-4">{f.icon}</div>
               <h3 className="font-semibold text-white mb-2">{f.title}</h3>
               <p className="text-sm text-gray-400 leading-relaxed">{f.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Under the hood */}
+      <section className="px-6 pb-28 max-w-4xl mx-auto">
+        <h2 className="text-3xl font-bold text-white text-center mb-3" style={{ letterSpacing: "-0.5px" }}>
+          What's under the hood?
+        </h2>
+        <p className="text-gray-500 text-center mb-12">No magic. No hand-waving. Here's exactly what's running.</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {internals.map((item, i) => (
+            <div key={item.title} className="flex gap-4 bg-gray-900 border border-gray-800 rounded-xl p-6">
+              <span className="flex-shrink-0 text-xs font-bold text-gray-600 pt-0.5 w-5">0{i + 1}</span>
+              <div>
+                <h3 className="font-semibold text-white mb-2">{item.title}</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">{item.body}</p>
+              </div>
             </div>
           ))}
         </div>
