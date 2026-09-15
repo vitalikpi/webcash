@@ -1,6 +1,13 @@
+import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AccountTree } from './components/AccountTree'
-import { accounts } from './data/accounts'
+import { type Account } from './data/accounts'
+
+async function fetchAccounts(): Promise<Account[]> {
+  const res = await fetch('/api/accounts')
+  if (!res.ok) throw new Error(`Failed to fetch accounts: ${res.status}`)
+  return res.json()
+}
 
 function AccountView() {
   return (
@@ -11,6 +18,15 @@ function AccountView() {
 }
 
 export default function App() {
+  const [accounts, setAccounts] = useState<Account[]>([])
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    fetchAccounts()
+      .then(setAccounts)
+      .catch(e => setError(e.message))
+  }, [])
+
   return (
     <div className="flex h-screen bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
       <aside className="flex w-56 shrink-0 flex-col border-r border-zinc-200 dark:border-zinc-800">
@@ -20,7 +36,11 @@ export default function App() {
           </span>
         </div>
         <div className="flex-1 overflow-y-auto">
-          <AccountTree accounts={accounts} />
+          {error ? (
+            <p className="px-3 py-3 text-xs text-red-500">{error}</p>
+          ) : (
+            <AccountTree accounts={accounts} />
+          )}
         </div>
       </aside>
 
