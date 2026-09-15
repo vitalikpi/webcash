@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useParams } from 'react-router-dom'
 import { AccountTree } from './components/AccountTree'
+import { TransactionGrid } from './components/TransactionGrid'
 import { type Account } from './data/accounts'
 
 async function fetchAccounts(): Promise<Account[]> {
@@ -15,6 +16,11 @@ function AccountView() {
       Select an account
     </div>
   )
+}
+
+function AccountTransactionsView() {
+  const { id } = useParams<{ id: string }>()
+  return <TransactionGrid accountId={id!} />
 }
 
 export default function App() {
@@ -47,7 +53,7 @@ export default function App() {
       <main className="flex flex-1 flex-col overflow-hidden">
         <Routes>
           <Route path="/" element={<AccountView />} />
-          <Route path="/accounts/:id" element={<AccountView />} />
+          <Route path="/accounts/:id" element={<AccountTransactionsView />} />
         </Routes>
       </main>
     </div>
