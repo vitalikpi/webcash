@@ -1,0 +1,10 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - gnucash_data:/data
+
+volumes:
+  gnucash_data:
